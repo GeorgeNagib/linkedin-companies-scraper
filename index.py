@@ -11,8 +11,8 @@ CONFIG = {
         "aboutPage": "https://www.linkedin.com/company/COMPANY/about"
     },
     "auth": {
-        "email": "georgesafwat@protonmail.com",
-        "password": "spotifystudioonmynoseyesterday"
+        "email": "EMAIL",
+        "password": "PASSWORD"
     },
     "selectors": {
         "login": {
@@ -26,7 +26,8 @@ CONFIG = {
             "number_of_employees": ".artdeco-card.p5.mb4 > .overflow-hidden > .text-body-small.t-black--light.mb1",
             "HQ": ".org-location-card.pv2 > p"
         }
-    }
+    },
+    "companies": ['oxus-ai', 'linkedin', 'google', 'facebook', 'twitter', 'amazon', 'microsoft']
 }
 
 
@@ -100,8 +101,6 @@ def main():
     # Creating webdriver
     driver = webdriver.Chrome(ChromeDriverManager().install())
     
-    companies = ['oxus-ai', 'linkedin', 'google', 'facebook', 'twitter', 'amazon', 'microsoft']
-
     # login with email and password
     login(driver)
 
@@ -112,7 +111,7 @@ def main():
 
         # write the header
         writer.writerow(header)
-        for company in companies:
+        for company in CONFIG['companies']:
             # write the data
             writer.writerow(getCompanyData(driver, company))
 
