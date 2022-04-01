@@ -8,7 +8,6 @@ CONFIG = {
     "waitingTime": 1, # waiting time for page loading in seconds
     "links": {
         "loginPage": "https://linkedin.com/uas/login",
-        "aboutPage": "https://www.linkedin.com/company/COMPANY/about"
     },
     "auth": {
         "email": "EMAIL",
@@ -27,7 +26,13 @@ CONFIG = {
             "HQ": ".org-location-card.pv2 > p"
         }
     },
-    "companies": ['oxus-ai', 'linkedin', 'google', 'facebook', 'twitter', 'amazon', 'microsoft']
+    "companies": [
+        "https://linkedin.com/company/oxus-ai",
+        "https://linkedin.com/company/facebook",
+        "https://linkedin.com/company/microsoft",
+        "https://linkedin.com/company/amazon/",
+        "https://linkedin.com/company/apple/"
+    ]
 }
 
 
@@ -53,9 +58,14 @@ def login(driver):
 
 
 def getCompanyData(driver, company):
-        
+    # adding about route
+    if(company.endswith('/')):
+        company = company + 'about'
+    else:
+        company = company + '/about'
+
     #navigate to company's profile
-    driver.get(CONFIG['links']['aboutPage'].replace('COMPANY', company))
+    driver.get(company)
 
     # waiting for the profile to load
     time.sleep(CONFIG['waitingTime'])
